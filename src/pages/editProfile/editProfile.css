@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+.edit-profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.form{
+    background: rgb(0, 0, 0);
+    height: 200px;
+    width: 100%;
+    text-align: center;
+    gap: 10px;
+    border-bottom: 1px solid white;
+}  
+.edit-form{
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+}
+.sub-button{
+    margin-top: 10px;
+    border: none;
+    width: 90px;
+    height: 25px;
+    background: #363636;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Poor+Story';
+}
+.sub-button , input {
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    width: 150px;
+}
+.sub-button:hover{
+    background: #ffffff77;
+}
+.edit-img{
+    margin-top: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* this for all post css edit */
+.img-continner{
+    background: black;
+}
+.img-form{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(auto, auto); 
+    justify-content: center; 
+    align-items: center; 
+    user-select: none;
+}
+.img-form img{
+    object-fit: cover;
+    height: 350px;
+    width: 350px;
+    cursor: pointer;
+    margin: 15px;
+}
+.img-form img:hover{
+    cursor: pointer;
+    
+}
+@media (min-width: 300px) and (max-width: 990px){
+    .img-form{
+        grid-template-columns: repeat(1, auto);
+        grid-template-rows: repeat(auto, auto); 
+    }
+    .img-form img{
+        height: 700px;
+        width: 700px;
+    }
+}
+@media(min-width: 999px) and (max-width: 1150px){
+    .img-form{
+        grid-template-columns: repeat(2, auto);
+    }
+}

@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+
+.header-contaier{
+    font-family: 'Rubik';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0, 0, 0);
+    position: fixed;
+    width: 200px;
+    height: 100vh;
+    border-right: white 1px solid;
+}
+ul{
+    position: fixed;
+    left: 0;
+    top: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.ulheader ul li > a, i{ 
+    text-decoration: none;
+    color: white;
+    margin: 10px 20px;
+    margin-right: 10px;
+}
+ul{
+    list-style: none;
+}
+.margin-betweent:hover{
+    background: rgba(255, 255, 255, 0.507);
+    border-radius: 10px;
+    transition: 0.5s;
+    
+}
+
+.appName{
+    color: white;
+    position: absolute;
+    top: 0;
+    font-family: 'Lobster';
+}
+.appName > a {
+    text-shadow: 1px 1px rgb(150, 142, 142);
+    color: white;
+    text-decoration: none;
+}
+.HeaderImg{
+    position: absolute;
+    top: 5%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.HeaderImg:hover{
+    border-radius: 20%;
+    transition: 0.5s;
+}
+
+
+@media (max-width: 900px) {
+
+}
+@media (min-width: 200px)and (max-width: 600px) {
+
+}
+@media(min-width:100px) and (max-width:1200px){
+
+}
+@media(min-width:1201px){
+
+}
