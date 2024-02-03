@@ -3,7 +3,7 @@ import './AddNewPost.css';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { CircularProgress } from '@mui/material';
+import { Alert, CircularProgress } from '@mui/material';
 
 
 function AddNewPost() {
@@ -15,6 +15,7 @@ function AddNewPost() {
   const [title, setTitle] = useState('');
   const [discraption, setDiscraption] = useState('');
   const [loading, setLoading] = useState('');
+  const [status, setStatus] = useState('');
 
   const onSubmit = async () => {
     const formData = new FormData();
@@ -24,7 +25,7 @@ function AddNewPost() {
 
     try {
       setLoading(true)
-      const newPost = await axios.post('http://localhost:4000/post', formData, {
+      await axios.post('http://localhost:4000/post', formData, {
         headers: {
           Authorization: jwt,
         },
@@ -32,6 +33,7 @@ function AddNewPost() {
       history.push('/get-all-post')
       setLoading(false)
     } catch (e) {
+      setStatus(e.response.status)
       console.log(e);
       setLoading(false)
     }
@@ -63,13 +65,16 @@ function AddNewPost() {
                   {img ?
                     <img className='imgOfnewPost' alt='Error' src={URL.createObjectURL(img)} />
                     :
-                    <input onChange={handleFileChange} type='file' />
+                    <input required className='imgFile' onChange={handleFileChange} type='file' />
                   }
                   <label>Title</label>
-                  <input value={title} onChange={(e) => setTitle(e.target.value)} className='text-input' type='text' />
+                  <input required value={title} onChange={(e) => setTitle(e.target.value)} className='text-input' type='text' />
                   <label>Dicraptions</label>
-                  <textarea value={discraption} onChange={(e) => setDiscraption(e.target.value)} type='text' />
+                  <textarea required value={discraption} onChange={(e) => setDiscraption(e.target.value)} type='text' />
                   <button className='post-button' onClick={onSubmit} type='submit'>نشر</button>
+                  {
+                    status ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto', marginBottom: "5px"}} className='alert' severity="error"> يحب اضافه جميع الحقول</Alert> : ''
+                  }
                 </div>
               </div>
             </div>

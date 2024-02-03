@@ -24,11 +24,11 @@
 
 }
 .inpus-continer > input{
-    outline: none;
     border: none;
     border-radius: 3px;
     width: 80%;
     height: 20px;
+    position: relative;
 }
 .inpus-continer > button {
     border: none;
@@ -46,6 +46,15 @@
     text-decoration: none;
     color: #000000;
 }
+input:after  {
+    content: "يجب ملأ الخانة";
+    /* أي أنه يجب أن يكون موضع العنصر في موضع نسبي ليعمل الـ :after بشكل صحيح */
+    position: absolute;
+    top: 100%; /* قم بتحديد الارتفاع الذي يظهر فيه النص */
+    left: 0;
+    color: red; /* يمكنك تغيير لون النص حسب احتياجك */
+  }
+  
 @media screen and (min-device-width: 300px) and (max-device-width: 768px) {
     .inpus-continer{
         font-size: 50px;
@@ -67,6 +76,9 @@
       color: azure;
       font-size: 30px;
       font-family: "Changa";
+  }
+  .alert{
+    font-size: 40px;
   }
   }
   

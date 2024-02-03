@@ -5,18 +5,18 @@ import { CircularProgress } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { AuthContext } from '../../context/AuthContext';
 
-function Allpost(props) {
+function Allpost() {
     const [images, setImages] = useState([]);
-    const [loading, setLoading] = useState([]);
-    // const [img, setImgFile] = useState('');
-    // const [title, setTitle] = useState('');
-    // const [discraption, setDiscraption] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const { setPostId } = useContext(AuthContext)
+
     useEffect(() => {
         getPost()
     }, []);
-    const history = useHistory()
+
+    const history = useHistory();
+    
     const getPost = async () => {
         try {
             setLoading(true)
@@ -24,7 +24,6 @@ function Allpost(props) {
             const SaveToimg = response.data.data.map(item => item.img);
             setImages(SaveToimg)
             setLoading(false)
-            const getPostId = response.data.data[0]._id
         } catch (e) {
             console.log(e)
             setLoading(false)
@@ -34,18 +33,17 @@ function Allpost(props) {
         const response = await axios.get('http://localhost:4000/get-all-post')
         setPostId(response.data.data[index]._id)
         history.push('/post/get-post')
-        console.log(response.data.data[0]._id)
     }
     return (
         <>
             {
-                loading ? <CircularProgress size={70}
-                    sx={{
-                        position: "fixed",
-                        left: "50%",
-                        top: "50%",
-                        transform: "translate(-50%, -50%)",
-                        zIndex: 2
+            loading ? <CircularProgress size={70}
+                sx={{
+                    position: "fixed",
+                    left: "50%",
+                    top: "50%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: 2
                     }} />
                     :
                     <>

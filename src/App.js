@@ -10,6 +10,7 @@ import EditProfile from "./pages/editProfile/EditProfile";
 import AddNewPost from "./pages/AddNewPost/AddNewPost";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import PostImg from "./pages/post/postImg";
+import UpdatePost from "./pages/update/UpdatePost";
 
 function App() {
 
@@ -20,11 +21,14 @@ function App() {
     <AuthContextProvider>
       <Router>
         <Switch>
+          <Route path='/post/get-post'>
+            <PostImg />
+          </Route>
           <Route path='/register'>
             <Register />
           </Route>
-          <Route path='/post/get-post'>
-            <PostImg />
+          <Route path='/update/post'>
+            <UpdatePost/>
           </Route>
           <Route path='/get-all-post'>
             <Headers />

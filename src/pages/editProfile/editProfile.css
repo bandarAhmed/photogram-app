@@ -51,6 +51,8 @@
 /* this for all post css edit */
 .img-continner{
     background: black;
+    height: auto;
+    min-height: 100vh;
 }
 .img-form{
     display: grid;

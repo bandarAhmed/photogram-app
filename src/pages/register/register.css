@@ -46,12 +46,13 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (min-device-width: 300px) and (max-device-width: 768px) {
+@media screen and (min-device-width: 1px) and (max-device-width: 768px) {
   .input-contianer {
-    height: 1000px;
+    min-height: 1100px;
+    height: auto;
     width: 95%;
-    font-size: 30px;
-
+    font-size: 45px;
+    margin: 10px;
   }
   .input-contianer > input {
     height: 50px;

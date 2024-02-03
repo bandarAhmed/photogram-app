@@ -4,7 +4,6 @@ import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext';
 import { Storage } from '@capacitor/storage';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-// import imagess from '../../components/images/Annotation 2024-01-23 201729.png';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -21,42 +20,44 @@ function EditProfile() {
     const [avatar, setAvatr] = useState('');
     const [dalog, setDalog] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [postId, setPostId] = useState('');
 
     const history = useHistory()
-    const { jwt } = useContext(AuthContext);
+    const { jwt, setPostId } = useContext(AuthContext);
 
 
     useEffect(() => {
         getData()
-    }, [])
+    }, [avatar, name]);
+
+
     const updatePro = async () => {
         const data = {
             name,
             password,
-            avatar
         }
         try {
             setDalog(true)
             setLoading(true)
-            const res = await axios.put('http://localhost:4000/account/update', data, {
+            await axios.put('http://localhost:4000/account/update', data, {
                 headers: {
                     Authorization: jwt
                 }
-            }).then(res => console.error(res))
+            })
             Storage.remove({
                 key: "accessToken"
             })
-
+            history.push('/get-all-post')
             setLoading(false)
         } catch (e) {
             console.log(e)
             setLoading(false)
         }
-    }
+    };
+
     const handelClose = () => {
         setDalog(false)
-    }
+    };
+
     const getData = async () => {
         try {
             setLoading(true)
@@ -71,18 +72,16 @@ function EditProfile() {
             setImages(getPost)
             setAvatr(posts.data.data[0].author.avatar)
             setLoading(false)
-
         } catch (e) {
             console.log(e)
             setLoading(false)
         }
     }
-    
-    const handleClick = async (index)=>{
+
+    const handleClick = async (index) => {
         const response = await axios.get('http://localhost:4000/get-all-post')
         setPostId(response.data.data[index]._id)
         history.push('/post/get-post')
-        console.log(response.data.data[0]._id)
     }
 
     return (
@@ -95,12 +94,11 @@ function EditProfile() {
                         top: "50%",
                         transform: "translate(-50%, -50%)",
                         zIndex: 2
-                    }}/>
+                    }} />
                     :
                     <>
                         <Dialog
                             open={dalog}
-                            // TransitionComponent={Transition}
                             keepMounted
                             onClose={handelClose}
                             aria-describedby="alert-dialog-slide-description"
@@ -117,6 +115,8 @@ function EditProfile() {
                             </DialogActions>
                         </Dialog>
                         <div className='edit-profile'>
+                        <Button style={{position: 'absolute', right: '1%', top: '3%', fontSize: "40px"}} onClick={() => history.push("/timesheet")}
+                    ><i class="fa fa-arrow-circle-o-right"></i></Button>
                             <div className='form'>
                                 <img src={avatar} className='edit-img' alt='error' />
                                 <div className='edit-form'>
@@ -130,7 +130,7 @@ function EditProfile() {
                             <div className='img-form'>
                                 {
                                     images.map((img, index) => (
-                                        <img onClick={()=> handleClick(index)} src={img} key={index} />
+                                        <img onClick={() => handleClick(index)} src={img} key={index} />
                                     )).reverse()
                                 }
                             </div>

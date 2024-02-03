@@ -20,15 +20,13 @@ ul{
     display: flex;
     flex-direction: column;
     gap: 30px;
+    list-style: none;
 }
 .ulheader ul li > a, i{ 
     text-decoration: none;
     color: white;
     margin: 10px 20px;
     margin-right: 10px;
-}
-ul{
-    list-style: none;
 }
 .margin-betweent:hover{
     background: rgba(255, 255, 255, 0.507);
@@ -61,16 +59,56 @@ ul{
     transition: 0.5s;
 }
 
-
-@media (max-width: 900px) {
-
+.btnOut{
+    border-radius: 10px;
+    transition: 0.5s;
+    background: rgba(255, 4, 4, 0.301);
+    cursor: pointer;
+    position: fixed;
+    bottom: 5%;
 }
-@media (min-width: 200px)and (max-width: 600px) {
 
-}
-@media(min-width:100px) and (max-width:1200px){
-
-}
-@media(min-width:1201px){
-
+@media (min-device-width: 1px) and (max-device-width: 768px) {
+    .header-contaier{
+        font-family: 'Rubik';
+        display: flex;
+        flex-direction: row;
+        background: rgb(0, 0, 0);
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 120px;
+        border-top: white 1px solid;
+        font-size: 30px;
+    }
+    ul{
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        top: 0;
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        list-style: none;
+    }
+    .appName{
+        display: none;
+    }
+    .HeaderImg{
+        position: absolute;
+        bottom: 5%;
+        top: 25px;
+        right: 3%;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    .btnOut{
+        border-radius: 10px;
+        background: rgba(255, 4, 4, 0.479);
+        position: sticky;
+        right: 30%;
+    }
 }

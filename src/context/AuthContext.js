@@ -8,7 +8,7 @@ function AuthContextProvider(props) {
 
     const [jwt , setJwt] = useState('');
     const [loggedIn, setLoggedIn] = useState(false)
-    const [postId, setPostId] = useState('')
+    const [postId, setPostId] = useState()
 
     useEffect(()=>{
         getAuthenticated()

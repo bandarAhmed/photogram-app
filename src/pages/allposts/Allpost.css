@@ -1,5 +1,6 @@
 .fullscrean{
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     background: rgb(0, 0, 0);
 }
 .post-container{
@@ -28,4 +29,40 @@
     object-fit: cover;
     border: 1px rgb(0, 0, 0) solid;
 
+}
+@media (min-device-width: 1px) and (max-device-width: 768px) {
+    .fullscrean{
+        height: auto;
+        background: rgb(0, 0, 0);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .post-container{
+        background: rgb(0, 0, 0);
+        width: auto ;
+        height: auto;
+        min-height: 100vh;
+        display: flex;
+    }
+    .images{
+        margin-left: 0px;
+        margin-right: 0px auto;
+        margin-bottom: 20px;
+        user-select: none;       
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+.images > img{
+    height: 650px;
+    width: 650px;
+    cursor: pointer;
+    object-fit: cover;
+    border: 1px rgb(0, 0, 0) solid;
+
+}
 }
