@@ -17,7 +17,7 @@ function EditProfile() {
     const [password, setPassword] = useState('');
     const [images, setImages] = useState([]);
     const [name, setName] = useState('');
-    const [avatar, setAvatr] = useState('');
+    const [avatar, setAvatr] = useState([]);
     const [dalog, setDalog] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -27,7 +27,7 @@ function EditProfile() {
 
     useEffect(() => {
         getData()
-    }, [avatar, name]);
+    }, [jwt]);
 
 
     const updatePro = async () => {
@@ -60,21 +60,30 @@ function EditProfile() {
 
     const getData = async () => {
         try {
-            setLoading(true)
-            const posts = await axios.get('http://localhost:4000/get-my-post',
+           const getUserPost = await axios.get('http://localhost:4000/get-my-post',
                 {
                     headers: {
                         Authorization: jwt
                     }
+                }).then(res=>     
+                {   
+                    const getPost = res.data.data.map(item => item.img);
+                    setImages(getPost);
                 })
-            const getPost = posts.data.data.map(item => item.img)
-            setName(posts.data.data[0].author.name)
-            setImages(getPost)
-            setAvatr(posts.data.data[0].author.avatar)
-            setLoading(false)
-        } catch (e) {
+        if (getUserPost == undefined){
+                    const getUserData = await axios.get('http://localhost:4000/getUserId',
+                {
+                    headers: {
+                        Authorization: jwt
+                    }
+                })     
+                   console.log(getUserData)
+                   setName(getUserData.data.name);
+                   setAvatr(getUserData.data.avatar);
+        }
+
+        } catch(e) {
             console.log(e)
-            setLoading(false)
         }
     }
 
@@ -100,7 +109,7 @@ function EditProfile() {
                         <Dialog
                             open={dalog}
                             keepMounted
-                            onClose={handelClose}
+                           
                             aria-describedby="alert-dialog-slide-description"
                         >
                             <DialogTitle>{"انت على وشك تعديل بياناتك"}</DialogTitle>
@@ -110,18 +119,18 @@ function EditProfile() {
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={{ button: "cansel" }}>لا</Button>
+                                <Button onClick={handelClose}>لا</Button>
                                 <Button onClick={() => history.push('/login')}>موافق</Button>
                             </DialogActions>
                         </Dialog>
                         <div className='edit-profile'>
                         <Button style={{position: 'absolute', right: '1%', top: '3%', fontSize: "40px"}} onClick={() => history.push("/timesheet")}
-                    ><i class="fa fa-arrow-circle-o-right"></i></Button>
+                    ><i className="fa fa-arrow-circle-o-right"></i></Button>
                             <div className='form'>
                                 <img src={avatar} className='edit-img' alt='error' />
                                 <div className='edit-form'>
                                     <input placeholder={name} value={name} onChange={(e) => setName(e.target.value)} />
-                                    <input placeholder='Password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                                    <input placeholder='Edit Password (Required)' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                                 </div>
                                 <button onClick={updatePro} className='sub-button' type='sumet'>Edit</button>
                             </div>

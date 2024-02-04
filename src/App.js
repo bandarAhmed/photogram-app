@@ -25,7 +25,11 @@ function App() {
             <PostImg />
           </Route>
           <Route path='/register'>
+          {
+            !loggedIn ? 
             <Register />
+             : <Redirect to='/account/update'/>
+          }
           </Route>
           <Route path='/update/post'>
             <UpdatePost/>

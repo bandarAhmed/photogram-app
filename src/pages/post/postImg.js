@@ -14,19 +14,20 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import './postImg.css'
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+
+
+
 function PostImg() {
 
     const [title, setTitle] = useState('');
     const [discraption, setDiscraption] = useState('');
     const [images, setImages] = useState([]);
     const [name, setName] = useState('');
-    const [avatar, setAvatr] = useState('');
-    // const [dalog, setDalog] = useState(false);
-    // const [loading, setLoading] = useState(false);
+    const [avatar, setAvatr] = useState([]);
     const [liked, setLike] = useState(false);
-    const [coutlikes, setLikeCount] = useState();
-    const [id, setId] = useState('');
-    const [_id, set_Id] = useState('');
+    const [coutlikes, setLikeCount] = useState('');
+    const [id, setId] = useState();
+    const [_id, set_Id] = useState();
     
     const { postId, jwt } = useContext(AuthContext);
     const history = useHistory()
@@ -35,8 +36,9 @@ function PostImg() {
         getData()
         coutlike()
         getId()
-    }, [liked, coutlikes, id]);
+    }, [liked, coutlikes, id, _id]);
 
+    
     if (postId !== undefined) {
         localStorage.setItem('postId', postId);
     }
@@ -44,7 +46,7 @@ function PostImg() {
 
     const putLike = async () => {
         try {
-            const like = await axios.post(`http://localhost:4000/post/${git}/like`, null, {
+             await axios.post(`http://localhost:4000/post/${git}/like`, null, {
                 headers: {
                     Authorization: jwt
                 }
@@ -58,22 +60,22 @@ function PostImg() {
     const coutlike = async () => {
         const like = await axios.get(`http://localhost:4000/post/${git}/cointlike`)
         setLikeCount(like.data.length)
-    }
+        
+    };
+
     const getData = async () => {
         try {
-            // setLoading(true)
             const posts = await axios.get(`http://localhost:4000/post/${git}/get-post`)
             setName(posts.data.data.author.name)
             setImages(posts.data.data.img)
             setAvatr(posts.data.data.author.avatar)
             setDiscraption(posts.data.data.discraption)
             setTitle(posts.data.data.title)
-            // setLoading(false)
+            
             setId(posts.data.data.author._id)
             console.log(posts.data.data.author._id)
         } catch (e) {
             console.log(e)
-            // setLoading(false)
         }
     }
 
@@ -86,26 +88,25 @@ function PostImg() {
             })
             set_Id(user_d.data.author._id)
             console.log(user_d.data.author._id)
+            
         } catch (e) {
             console.log(e)
         }
     }
     const deletePost = async () => {
         try {
-            // setLoading(true)
-            if(id == _id){ 
+            if(id === _id){ 
                 await axios.delete(`http://localhost:4000/post/${git}/delete`,{
                     headers:{
                         Authorization: jwt
                     }
                 })
                 history.push('/account/update')
-            }else if( id != _id){
+            }else if( id !== _id){
                 return 0
             }
         } catch (e) {
             console.log(e)
-            // setLoading(false)
         }
     }
 
@@ -139,14 +140,18 @@ function PostImg() {
                             }
                             <p style={{ color: 'white', margin: '2px' }}>{coutlikes}</p>
                         </IconButton>
-                        <Button onClick={() => history.push('/update/post')} variant="outlined" size="small" style={{ position: 'absolute', right: '120px' }}>
-                            Edit My Post</Button>
-                    </CardActions>
-                    {
-                        id == _id ? <DeleteIcon onClick={deletePost} fontSize="small" size="small" style={{ position: 'absolute', right: '120px', cursor: 'pointer' }} />
+                        {
+                        id === _id ? <Button onClick={() => history.push('/update/post')} variant="outlined" size="small" style={{ position: 'absolute', right: '120px' }}>
+                        Edit My Post</Button>
                         : ''
                     }
-                       
+                    </CardActions>
+                    {
+                        id === _id ? <DeleteIcon onClick={deletePost} fontSize="small" size="small" style={{ position: 'absolute', right: '120px', cursor: 'pointer' }} />
+                        : ''
+                    }
+                 
+                        
                     
                     <CardContent>
                         <Typography variant="h6" fontSize={'30px'} color="blcak">

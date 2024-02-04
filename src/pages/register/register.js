@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "./register.css";
 import Alert from '@mui/material/Alert';
 import { CircularProgress } from '@mui/material';
@@ -80,15 +80,15 @@ function Register() {
                     :
                     <input className='imgFile' onChange={handleFileChange} type='file' />
             }
-          <label for='name'>اسم المستخدم</label>
+          <label htmlFor='name'>اسم المستخدم</label>
           <input  name='name' value={name} onChange={(e) => setName(e.target.value)} type='text' required/>
 
-          <label for="email">البريد الاكتروني</label>
+          <label htmlFor="email">البريد الاكتروني</label>
           <input  name='email' value={email} onChange={(e) => setEmail(e.target.value)} type='text' required/>
 
-          <label for="password">كلمة المرور</label>
+          <label htmlFor="password">كلمة المرور</label>
           <input  name='password' value={password} onChange={(e) => setPassword(e.target.value)} type='password' required/>
-          <label for="password2">تأكيد كلمة المرور</label>
+          <label htmlFor="password2">تأكيد كلمة المرور</label>
           <input  name='password2' onChange={(e) => setSeePassword(e.target.value)} type='password' required/>
           <button type='sunmet' onClick={()=> onSubmet()}>انشاء الحساب</button>
           <br/>
@@ -96,9 +96,9 @@ function Register() {
             password !== seePassword ? <Alert style={{fontSize: '20px'}} className='alert' severity="error">كلمه المرور غير متطابقه</Alert> : ''
           }
           {
-            Status == 401 ? <Alert style={{fontSize: '20px', marginTop: '30px'}} className='alert' severity="error">الحساب مسجل اذهب الى لدي حساب بالفعل</Alert> 
+            Status === 401 ? <Alert style={{fontSize: '20px', marginTop: '30px'}} className='alert' severity="error">الحساب مسجل اذهب الى لدي حساب بالفعل</Alert> 
             : 
-            Status == 500 ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">املأ جميع الخانات</Alert> : ''
+            Status === 500 ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">املأ جميع الخانات</Alert> : ''
           }
           <a href='/login'>لدي حساب بالفعل</a>
         </div>

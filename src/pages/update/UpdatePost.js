@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
@@ -19,6 +19,7 @@ function UpdatePost() {
     sessionStorage.setItem('postId', postId);
 }
 const git = sessionStorage.getItem('postId', postId)
+
   const UpdateData = async () => {
     const data = new FormData()
     data.append('upimg',images)
@@ -27,7 +28,7 @@ const git = sessionStorage.getItem('postId', postId)
         
     try {
         setLoading(true)
-        const posts = await axios.put(`http://localhost:4000/post/${git}/update`, data, {
+        await axios.put(`http://localhost:4000/post/${git}/update`, data, {
           headers: {
             Authorization: jwt,
           },

@@ -10,7 +10,6 @@ function AddNewPost() {
 
   const history = useHistory()
   const { jwt } = useContext(AuthContext);
-
   const [img, setImgFile] = useState('');
   const [title, setTitle] = useState('');
   const [discraption, setDiscraption] = useState('');

@@ -31,6 +31,7 @@ function Login() {
       })
       setLoading(false)
       history.push('/get-all-post')
+      window.location.reload();
     } catch (e) {
       setLoading(false)
       setStatus(e.response.status)
@@ -54,15 +55,15 @@ function Login() {
           <>
             <div className='login-contianer'>
               <div className='inpus-continer'>
-                <label for='email'>البريد الكترني</label>
+                <label htmlFor='email'>البريد الكترني</label>
                 <input  name='email' value={email} type='text' onChange={(e) => setEmail(e.target.value)} required/>
-                <label for='password'>كلمه المرور</label>
+                <label htmlFor='password'>كلمه المرور</label>
                 <input name='password' value={password} onChange={(e) => { setPassword(e.target.value) }} type='password' required/>
                 <button onClick={() =>  onSubmet() }>تسجيل</button>
                 <a href='register'>انشاء حساب</a>
                 {
-                  status == 401 ?  <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">كلمه المرور او البريد غير صحيحه</Alert> 
-                  : status == 500 ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">املأ جميع الخانات</Alert> : ''
+                  status === 401 ?  <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">كلمه المرور او البريد غير صحيحه</Alert> 
+                  : status === 500 ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">املأ جميع الخانات</Alert> : ''
                 }
               </div>
             </div>

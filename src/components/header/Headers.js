@@ -6,45 +6,57 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Storage } from '@capacitor/storage';
 import axios from 'axios';
 import avatar2 from '../../AvatarImage/avatar2.png'
+import { CircularProgress } from '@mui/material';
 
 function Headers() {
-  const [img, setImg] = useState('');
-  const {  jwt, loggedIn } = useContext(AuthContext);
+  const [img, setImg] = useState();
+  const [loading, setLoading]= useState(false);
+
+  
+  const { jwt, loggedIn } = useContext(AuthContext);
 
   const history = useHistory();
 
-  useEffect(()=>{
-    gitImage()
-  },[img]);
 
-  const gitImage = async ()=> {
+  useEffect(() => {
+    gitImage()
+  }, [jwt]);
+
+  const gitImage = async () => {
+   
     try {
-      await axios.get('http://localhost:4000/get-my-post',
-      {
-          headers: {
-              Authorization: jwt
-          }
-      }).then(res=> setImg(res.data.data[0].author.avatar))
-      
+      const response = await axios.get('http://localhost:4000/getUserId', {
+        headers: {
+          Authorization: jwt
+        }
+      });
+      setImg(response.data.avatar);
     } catch (e) {
-      console.log(e)
+      console.error(e);
+      
     }
   };
- 
-  const logOut = async ()=> {
+
+  const logOut = async () => {
+    setLoading(true);
     await Storage.remove({
       key: 'accessToken'
-    })
-    await history.push('/login')
-  }
+    });
+    history.push('/get-all-post');
+    window.location.reload();
+    setLoading(false);
+  };
   return (
     <>
+    {
+      loading ? <CircularProgress  size={70}/> :
+      <>
       <div className='header-contaier'>
         <p className='appName'><a href='/get-all-post'>Photogram</a></p>
         {
-          img ? <img className='HeaderImg' onClick={()=> history.push('/account/update')}  src={img} />
-          :
-          <img className='HeaderImg' onClick={()=> history.push('/account/update')}  src={avatar2} />
+          img ? <img className='HeaderImg' onClick={() => history.push('/account/update')} src={img} />
+            :
+            <img className='HeaderImg' onClick={() => history.push('/account/update')} src={avatar2} />
 
         }
         <div className='ulheader'>
@@ -52,7 +64,7 @@ function Headers() {
             <div className='margin-betweent'>
               <li>
                 <i className="fa-regular fa-square-plus"></i>
-                <a  href='/post'>Add</a>
+                <a href='/post'>Add</a>
               </li>
             </div>
             <div className='margin-betweent'>
@@ -69,18 +81,20 @@ function Headers() {
                     <a href='/login'>Login</a>
                   </li>
                 </div>
-                : 
+                :
                 <div className='btnOut'>
-                <li >
-                  <i className="fa-solid fa-arrow-right-to-bracket"></i>
-                  <a onClick={()=> logOut()}>Log out</a>
-                </li>
-              </div>
+                  <li >
+                    <i className="fa-solid fa-arrow-right-to-bracket"></i>
+                    <a onClick={logOut}>Log out</a>
+                  </li>
+                </div>
             }
-              
+
           </ul>
         </div>
       </div>
+      </>
+    }
     </>
   )
 }
