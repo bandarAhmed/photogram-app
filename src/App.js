@@ -21,6 +21,9 @@ function App() {
     <AuthContextProvider>
       <Router>
         <Switch>
+        <Route exact path="/">
+              <Redirect to='/get-all-post'/>
+          </Route>
           <Route path='/post/get-post'>
             <PostImg />
           </Route>
@@ -48,7 +51,7 @@ function App() {
             }
           </Route>
             {
-              loggedIn ? <Redirect to='/get-all-post' /> : <Route path='/login'><Login /></Route>
+            loggedIn ? <Redirect to='/get-all-post' /> : <Route path='/login'><Login /></Route>
             }
         </Switch>
       </Router>
