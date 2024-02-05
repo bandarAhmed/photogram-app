@@ -24,39 +24,38 @@ function App() {
         <Route exact path="/">
               <Redirect to='/get-all-post'/>
           </Route>
-          <Route path='/post/get-post'>
+          <Route exact path='/post/get-post'>
             <PostImg />
           </Route>
-          <Route path='/register'>
+          <Route exact path='/register'>
           {
             !loggedIn ? 
             <Register />
              : <Redirect to='/account/update'/>
           }
           </Route>
-          <Route path='/update/post'>
+          <Route exact path='/update/post'>
             <UpdatePost/>
           </Route>
-          <Route path='/get-all-post'>
+          <Route exact path='/get-all-post'>
             <Headers />
             <Allpost />
           </Route>
-          <Route path='/post'>
+          <Route exact path='/post'>
             <Headers />
             <AddNewPost />
           </Route>
-          <Route path='/account/update'>
+          <Route exact path='/account/update'>
             {
               loggedIn ? <EditProfile /> : <Redirect to='/login' />
             }
           </Route>
             {
-            loggedIn ? <Redirect to='/get-all-post' /> : <Route path='/login'><Login /></Route>
+            loggedIn ? <Redirect to='/get-all-post' /> : <Route exact path='/login'><Login /></Route>
             }
         </Switch>
       </Router>
     </AuthContextProvider>
-
   );
 }
 

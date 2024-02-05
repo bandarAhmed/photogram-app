@@ -50,7 +50,6 @@ function Register() {
           value: res.data.accessToken
         })
       })
-     https://photogramserver.onrender.com/
       history.push('/get-all-post')
     } catch (e) {
       setStatus(e.response.status)
