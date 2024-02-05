@@ -38,7 +38,7 @@ function EditProfile() {
         try {
             setDalog(true)
             setLoading(true)
-            await axios.put('http://localhost:4000/account/update', data, {
+            await axios.put('https://photogramserver.onrender.com/account/update', data, {
                 headers: {
                     Authorization: jwt
                 }
@@ -60,7 +60,7 @@ function EditProfile() {
 
     const getData = async () => {
         try {
-           const getUserPost = await axios.get('http://localhost:4000/get-my-post',
+           const getUserPost = await axios.get('https://photogramserver.onrender.com/get-my-post',
                 {
                     headers: {
                         Authorization: jwt
@@ -71,7 +71,7 @@ function EditProfile() {
                     setImages(getPost);
                 })
         if (getUserPost == undefined){
-                    const getUserData = await axios.get('http://localhost:4000/getUserId',
+                    const getUserData = await axios.get('https://photogramserver.onrender.com/getUserId',
                 {
                     headers: {
                         Authorization: jwt
@@ -88,7 +88,7 @@ function EditProfile() {
     }
 
     const handleClick = async (index) => {
-        const response = await axios.get('http://localhost:4000/get-all-post')
+        const response = await axios.get('https://photogramserver.onrender.com/get-all-post')
         setPostId(response.data.data[index]._id)
         history.push('/post/get-post')
     }

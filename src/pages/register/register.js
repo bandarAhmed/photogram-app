@@ -27,7 +27,7 @@ function Register() {
    form.append('avatar', avatar)
     try {
       setLoading(true)
-      await axios.post('http://localhost:4000/register', form)
+      await axios.post('https://photogramserver.onrender.com/register', form)
       setLoading(false)
       
     } catch (e) {
@@ -44,13 +44,13 @@ function Register() {
       }
     
     try {
-        await axios.post('http://localhost:4000/login', formLogin).then(res => {
+        await axios.post('https://photogramserver.onrender.com/login', formLogin).then(res => {
           Preferences.set({
           key: 'accessToken',
           value: res.data.accessToken
         })
       })
-     
+     https://photogramserver.onrender.com/
       history.push('/get-all-post')
     } catch (e) {
       setStatus(e.response.status)

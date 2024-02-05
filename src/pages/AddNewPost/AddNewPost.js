@@ -24,7 +24,7 @@ function AddNewPost() {
 
     try {
       setLoading(true)
-      await axios.post('http://localhost:4000/post', formData, {
+      await axios.post('https://photogramserver.onrender.com/post', formData, {
         headers: {
           Authorization: jwt,
         },
