@@ -20,7 +20,7 @@ function Allpost() {
     const getPost = async () => {
         try {
             setLoading(true)
-            const response = await axios.get('https://photogramserver.onrender.com/get-all-post')
+            const response = await axios.get('http://localhost:4000/get-all-post')
             const SaveToimg = response.data.data.map(item => item.img);
             setImages(SaveToimg)
             setLoading(false)
@@ -30,7 +30,7 @@ function Allpost() {
         }
     }
     const handleClick = async (index)=>{
-        const response = await axios.get('https://photogramserver.onrender.com/get-all-post')
+        const response = await axios.get('http://localhost:4000/get-all-post')
         setPostId(response.data.data[index]._id)
         history.push('/post/get-post')
     }
