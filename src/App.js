@@ -21,11 +21,6 @@ function App() {
     <AuthContextProvider>
       <Router>
         <Switch>
-        {
-            !loggedIn ? 
-            <Register />
-             : ''
-          }
           <Route path='/post/get-post'>
             <PostImg />
           </Route>

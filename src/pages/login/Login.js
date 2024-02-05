@@ -23,7 +23,7 @@ function Login() {
     
     try {
       setLoading(true)
-      await axios.post('http://localhost:4000/login', bassData).then(res => {
+      await axios.post('https://photogramserver.onrender.com/login', bassData).then(res => {
         Storage.set({
           key: 'accessToken',
           value: res.data.accessToken
