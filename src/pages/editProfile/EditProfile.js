@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import './editProfile.css';
 import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -43,7 +43,7 @@ function EditProfile() {
                     Authorization: jwt
                 }
             })
-            Storage.remove({
+            Preferences.remove({
                 key: "accessToken"
             })
             history.push('/get-all-post')

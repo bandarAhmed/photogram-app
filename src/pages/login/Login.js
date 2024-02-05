@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './login.css'
 // import { LOGIN_URL } from '../../config/urls';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import axios from 'axios';
 import { Alert, CircularProgress } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
@@ -23,8 +23,8 @@ function Login() {
     
     try {
       setLoading(true)
-      await axios.post('https://photogramserver.onrender.com/login', bassData).then(res => {
-        Storage.set({
+      await axios.post('http://localhost:4000/login', bassData).then(res => {
+        Preferences.set({
           key: 'accessToken',
           value: res.data.accessToken
         })

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import './header.css'
 import { AuthContext } from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import axios from 'axios';
 import avatar2 from '../../AvatarImage/avatar2.png'
 import { CircularProgress } from '@mui/material';
@@ -39,7 +39,7 @@ function Headers() {
 
   const logOut = async () => {
     setLoading(true);
-    await Storage.remove({
+    await Preferences.remove({
       key: 'accessToken'
     });
     history.push('/get-all-post');

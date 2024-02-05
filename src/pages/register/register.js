@@ -4,7 +4,7 @@ import "./register.css";
 import Alert from '@mui/material/Alert';
 import { CircularProgress } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 
 
 function Register() {
@@ -45,7 +45,7 @@ function Register() {
     
     try {
         await axios.post('http://localhost:4000/login', formLogin).then(res => {
-        Storage.set({
+          Preferences.set({
           key: 'accessToken',
           value: res.data.accessToken
         })

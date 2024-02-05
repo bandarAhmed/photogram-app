@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 
 // create context to use  here u wnat
 export const AuthContext  = createContext();
@@ -16,7 +16,7 @@ function AuthContextProvider(props) {
     
     const getAuthenticated = async () => {
         try {
-            const accessToken = await Storage.get({key: 'accessToken'})
+            const accessToken = await Preferences.get({key: 'accessToken'})
             if(accessToken.value){
                 setJwt(accessToken.value)
                 setLoggedIn(true)
