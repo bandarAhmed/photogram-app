@@ -28,7 +28,7 @@ const git = sessionStorage.getItem('postId', postId)
         
     try {
         setLoading(true)
-        await axios.put(`http://localhost:4000/post/${git}/update`, data, {
+        await axios.put(`https://photogramserver.onrender.com/post/${git}/update`, data, {
           headers: {
             Authorization: jwt,
           },

@@ -17,7 +17,7 @@ function Headers() {
 
   const history = useHistory();
 
-
+https://photogramserver.onrender.com/
   useEffect(() => {
     gitImage()
   }, [jwt]);
@@ -25,7 +25,7 @@ function Headers() {
   const gitImage = async () => {
    
     try {
-      const response = await axios.get('http://localhost:4000/getUserId', {
+      const response = await axios.get('https://photogramserver.onrender.com/getUserId', {
         headers: {
           Authorization: jwt
         }
