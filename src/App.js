@@ -48,7 +48,7 @@ function App() {
             }
           </Route>
             {
-            loggedIn ? <Redirect to='/get-all-post' /> : <Route path='/login'><Login /></Route>
+              loggedIn ? <Redirect to='/get-all-post' /> : <Route path='/login'><Login /></Route>
             }
         </Switch>
       </Router>
