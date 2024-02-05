@@ -31,7 +31,7 @@ function App() {
           {
             !loggedIn ? 
             <Register />
-             : <Redirect to='/account/update'/>
+             : <Redirect exact to='/account/update'/>
           }
           </Route>
           <Route exact path='/update/post'>
@@ -47,11 +47,11 @@ function App() {
           </Route>
           <Route exact path='/account/update'>
             {
-              loggedIn ? <EditProfile /> : <Redirect to='/login' />
+              loggedIn ? <EditProfile /> : <Redirect exact to='/login' />
             }
           </Route>
             {
-            loggedIn ? <Redirect to='/get-all-post' /> : <Route exact path='/login'><Login /></Route>
+            loggedIn ? <Redirect exact to='/get-all-post' /> : <Route exact path='/login'><Login /></Route>
             }
         </Switch>
       </Router>

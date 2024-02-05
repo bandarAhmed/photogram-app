@@ -70,10 +70,10 @@ function AddNewPost() {
                   <input required value={title} onChange={(e) => setTitle(e.target.value)} className='text-input' type='text' />
                   <label>Dicraptions</label>
                   <textarea required value={discraption} onChange={(e) => setDiscraption(e.target.value)} type='text' />
-                  <button className='post-button' onClick={onSubmit} type='submit'>نشر</button>
                   {
                     status ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto', marginBottom: "5px"}} className='alert' severity="error"> يحب اضافه جميع الحقول</Alert> : ''
                   }
+                  <button className='post-button' onClick={onSubmit} type='submit'>نشر</button>
                 </div>
               </div>
             </div>
