@@ -63,7 +63,7 @@ function Login() {
                 <a href='register'>انشاء حساب</a>
                 {
                   status === 401 ?  <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">كلمه المرور او البريد غير صحيحه</Alert> 
-                  : status === 500 ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">املأ جميع الخانات</Alert> : ''
+                  : status === 500 ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">املأ جميع الخانات وتأكد من المعلومات</Alert> : ''
                 }
               </div>
             </div>

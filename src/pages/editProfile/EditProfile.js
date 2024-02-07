@@ -21,13 +21,16 @@ function EditProfile() {
     const [dalog, setDalog] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const history = useHistory()
+    const history = useHistory();
+
     const { jwt, setPostId } = useContext(AuthContext);
 
 
     useEffect(() => {
-        getData()
-    }, [jwt]);
+        if(jwt){
+            getData();
+        }
+    }, []);
 
 
     const updatePro = async () => {
@@ -49,7 +52,6 @@ function EditProfile() {
             history.push('/get-all-post')
             setLoading(false)
         } catch (e) {
-            console.log(e)
             setLoading(false)
         }
     };
@@ -60,6 +62,7 @@ function EditProfile() {
 
     const getData = async () => {
         try {
+            setLoading(true)
            const getUserPost = await axios.get('https://photogramserver.onrender.com/get-my-post',
                 {
                     headers: {
@@ -70,26 +73,27 @@ function EditProfile() {
                     const getPost = res.data.data.map(item => item.img);
                     setImages(getPost);
                 })
-        if (getUserPost == undefined){
-                    const getUserData = await axios.get('https://photogramserver.onrender.com/getUserId',
+        if (getUserPost === undefined){
+                const getUserData = await axios.get('https://photogramserver.onrender.com/getUserId',
                 {
                     headers: {
                         Authorization: jwt
                     }
-                })     
-                   console.log(getUserData)
-                   setName(getUserData.data.name);
-                   setAvatr(getUserData.data.avatar);
+                })   
+                setName(getUserData.data.name);
+                setAvatr(getUserData.data.avatar);
         }
-
+        setLoading(false)
         } catch(e) {
-            console.log(e)
+            setLoading(false)
         }
     }
 
     const handleClick = async (index) => {
+        setLoading(true)
         const response = await axios.get('https://photogramserver.onrender.com/get-all-post')
         setPostId(response.data.data[index]._id)
+        setLoading(false)
         history.push('/post/get-post')
     }
 
@@ -130,7 +134,7 @@ function EditProfile() {
                                 <img src={avatar} className='edit-img' alt='error' />
                                 <div className='edit-form'>
                                     <input placeholder={name} value={name} onChange={(e) => setName(e.target.value)} />
-                                    <input placeholder='Edit Password (Requiredhttps://photogramserver.onrender.com/)' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                                    <input placeholder='Edit Password (Required)' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                                 </div>
                                 <button onClick={updatePro} className='sub-button' type='sumet'>Edit</button>
                             </div>

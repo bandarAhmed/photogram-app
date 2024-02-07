@@ -30,6 +30,11 @@
     border: 1px rgb(0, 0, 0) solid;
 
 }
+.images > img:hover{
+    height: 351px;
+    width: 351px;
+    border: white solid 1px;
+}
 @media (min-device-width: 1px) and (max-device-width: 768px) {
     .fullscrean{
         height: auto;
@@ -63,6 +68,10 @@
     cursor: pointer;
     object-fit: cover;
     border: 1px rgb(0, 0, 0) solid;
+}
+.images > img:hover{
+    height: 651px;
+    width: 651px;
 
 }
 }

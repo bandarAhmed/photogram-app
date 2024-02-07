@@ -22,7 +22,7 @@ function App() {
       <Router>
         <Switch>
         <Route exact path="/">
-              <Redirect to='/get-all-post'/>
+              <Redirect to='/login'/>
           </Route>
           <Route exact path='/post/get-post'>
             <PostImg />
@@ -51,7 +51,7 @@ function App() {
             }
           </Route>
             {
-            loggedIn ? <Redirect exact to='/get-all-post' /> : <Route exact path='/login'><Login /></Route>
+            loggedIn ? <Redirect exact to='/get-all-post' /> : <Route exact path='/login'><Headers/><Login /></Route>
             }
         </Switch>
       </Router>
