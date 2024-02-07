@@ -47,7 +47,7 @@ function PostImg() {
 
     const putLike = async () => {
         try {
-             await axios.post(`https://photogramserver.onrender.com/post/${git}/like`, null, {
+             await axios.post(`http://localhost:4000/post/${git}/like`, null, {
                 headers: {
                     Authorization: jwt
                 }
@@ -59,14 +59,14 @@ function PostImg() {
     }
 
     const coutlike = async () => {
-        const like = await axios.get(`https://photogramserver.onrender.com/post/${git}/cointlike`)
+        const like = await axios.get(`http://localhost:4000/post/${git}/cointlike`)
         setLikeCount(like.data.length)
     };
 
 
     const getData = async () => {
         try {
-            const posts = await axios.get(`https://photogramserver.onrender.com/post/${git}/get-post`)
+            const posts = await axios.get(`http://localhost:4000/post/${git}/get-post`)
             setName(posts.data.data.author.name)
             setImages(posts.data.data.img)
             setAvatr(posts.data.data.author.avatar)
@@ -81,7 +81,7 @@ function PostImg() {
     const getId = async ()=> {
         try {
           
-            const user_d = await axios.get(`https://photogramserver.onrender.com/post/findId`, {
+            const user_d = await axios.get(`http://localhost:4000/post/findId`, {
                 headers: {
                     Authorization: jwt
                 }
@@ -95,7 +95,7 @@ function PostImg() {
         try {
             setLoading(true)
             if(id === _id){ 
-                await axios.delete(`https://photogramserver.onrender.com/post/${git}/delete`,{
+                await axios.delete(`http://localhost:4000/post/${git}/delete`,{
                     headers:{
                         Authorization: jwt
                     }

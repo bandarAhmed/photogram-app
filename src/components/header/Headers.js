@@ -24,7 +24,7 @@ function Headers() {
 
   const gitImage = async () => {
     try {
-      await axios.get('https://photogramserver.onrender.com/getUserId', {
+      await axios.get('http://localhost:4000/getUserId', {
         headers: {
           Authorization: jwt
         }
