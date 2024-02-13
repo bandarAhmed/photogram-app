@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 import { Button, CircularProgress } from '@mui/material';
 import './updatePost.css';
+import { url } from '../../config/url';
 
 function UpdatePost() {
   const [title, setTitle] = useState('');
@@ -28,7 +29,7 @@ const git = sessionStorage.getItem('postId', postId)
         
     try {
         setLoading(true)
-        await axios.put(`http://localhost:4000/post/${git}/update`, data, {
+        await axios.put( url +`post/${git}/update`, data, {
           headers: {
             Authorization: jwt,
           },

@@ -10,7 +10,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: 130vh;
     height: auto;
     
 }
@@ -29,8 +29,8 @@ body{
 /* all posts */
 .name-img{
     position: relative;
-    top: 25%;
-    width: 25%;
+    top: 18%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -60,9 +60,11 @@ body{
     margin-top: 30px;
 }
 .posts > img{
-    border-radius: 20px;
-    
+    border-radius: 15px;
+    height: 500px;
+    width: 800px;
 }
+
 
 @media (min-width: 1px) and (max-width: 768px)  {
     .background{

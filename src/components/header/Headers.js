@@ -7,6 +7,7 @@ import { Preferences } from '@capacitor/preferences';
 import axios from 'axios';
 import avatar2 from '../../AvatarImage/avatar2.png'
 import { CircularProgress } from '@mui/material';
+import { url } from '../../config/url';
 
 function Headers() {
   const [img, setImg] = useState();
@@ -24,7 +25,7 @@ function Headers() {
 
   const gitImage = async () => {
     try {
-      await axios.get('http://localhost:4000/getUserId', {
+      await axios.get(url + 'getUserId', {
         headers: {
           Authorization: jwt
         }

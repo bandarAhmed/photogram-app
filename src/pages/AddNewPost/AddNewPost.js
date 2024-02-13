@@ -4,6 +4,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Alert, CircularProgress } from '@mui/material';
+import { url } from '../../config/url';
 
 
 function AddNewPost() {
@@ -24,7 +25,7 @@ function AddNewPost() {
 
     try {
       setLoading(true)
-      await axios.post('http://localhost:4000/post', formData, {
+      await axios.post( url + 'post', formData, {
         headers: {
           Authorization: jwt,
         },

@@ -5,6 +5,7 @@ import Alert from '@mui/material/Alert';
 import { CircularProgress } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Preferences } from '@capacitor/preferences';
+import { url } from '../../config/url';
 
 
 function Register() {
@@ -27,7 +28,7 @@ function Register() {
    form.append('avatar', avatar)
     try {
       setLoading(true)
-      await axios.post('http://localhost:4000/register', form)
+      await axios.post(url +'register', form)
       setLoading(false)
       
     } catch (e) {
@@ -44,7 +45,7 @@ function Register() {
       }
     
     try {
-        await axios.post('http://localhost:4000/login', formLogin).then(res => {
+        await axios.post(url +'login', formLogin).then(res => {
           Preferences.set({
           key: 'accessToken',
           value: res.data.accessToken

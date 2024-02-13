@@ -11,6 +11,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { CircularProgress } from '@mui/material';
+import { url } from '../../config/url';
 
 function EditProfile() {
 
@@ -41,7 +42,7 @@ function EditProfile() {
         try {
             setDalog(true)
             setLoading(true)
-            await axios.put('http://localhost:4000/account/update', data, {
+            await axios.put(url +'account/update', data, {
                 headers: {
                     Authorization: jwt
                 }
@@ -63,7 +64,7 @@ function EditProfile() {
     const getData = async () => {
         try {
             setLoading(true)
-           const getUserPost = await axios.get('http://localhost:4000/get-my-post',
+           const getUserPost = await axios.get(url +'get-my-post',
                 {
                     headers: {
                         Authorization: jwt
@@ -74,7 +75,7 @@ function EditProfile() {
                     setImages(getPost);
                 })
         if (getUserPost === undefined){
-                const getUserData = await axios.get('http://localhost:4000/getUserId',
+                const getUserData = await axios.get(url +'getUserId',
                 {
                     headers: {
                         Authorization: jwt
@@ -91,7 +92,7 @@ function EditProfile() {
 
     const handleClick = async (index) => {
         setLoading(true)
-        const response = await axios.get('http://localhost:4000/get-all-post')
+        const response = await axios.get(url +'get-all-post')
         setPostId(response.data.data[index]._id)
         setLoading(false)
         history.push('/post/get-post')

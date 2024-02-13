@@ -25,7 +25,7 @@ function App() {
               <Redirect to='/login'/>
           </Route>
           <Route exact path='/post/get-post'>
-            <Headers/>
+            <Headers />
             <PostImg />
           </Route>
           <Route exact path='/register'>

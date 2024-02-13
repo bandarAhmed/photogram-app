@@ -5,6 +5,7 @@ import { Preferences } from '@capacitor/preferences';
 import axios from 'axios';
 import { Alert, CircularProgress } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { url } from '../../config/url';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -23,7 +24,7 @@ function Login() {
     
     try {
       setLoading(true)
-      await axios.post('http://localhost:4000/login', bassData).then(res => {
+      await axios.post( url +'login', bassData).then(res => {
         Preferences.set({
           key: 'accessToken',
           value: res.data.accessToken

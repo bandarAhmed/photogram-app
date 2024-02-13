@@ -8,6 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import './postImg.css'
 import { Button, CircularProgress } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { url } from '../../config/url';
 
 
 
@@ -77,7 +78,7 @@ function PostImg() {
     const getId = async ()=> {
         try {
           
-            const user_d = await axios.get(`http://localhost:4000/post/findId`, {
+            const user_d = await axios.get(url +`post/findId`, {
                 headers: {
                     Authorization: jwt
                 }
@@ -91,7 +92,7 @@ function PostImg() {
         try {
             setLoading(true)
             if(id === _id){ 
-                await axios.delete(`http://localhost:4000/post/${git}/delete`,{
+                await axios.delete(url +`post/${git}/delete`,{
                     headers:{
                         Authorization: jwt
                     }
@@ -118,9 +119,9 @@ function PostImg() {
             <>       
             <div className='centerBack'>  
             <div className='background'>
-            <Button style={{position: 'absolute', right: '1%', top: '1.5%', fontSize: "20px"}} onClick={() => history.push("/timesheet")}>Posts<i className="fa fa-arrow-circle-o-right"></i></Button>
                     <div className='name-img'>
                     <img  src={avatar}/>
+                     <Button style={{position: 'absolute', right: '1%', top: '1.5%', fontSize: "20px"}} onClick={() => history.push("/timesheet")}>Posts<i className="fa fa-arrow-circle-o-right"></i></Button>
                     <p style={{color: 'white'}}>{name}</p>
                 </div>
                 <div className='posts'>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { AuthContext } from '../../context/AuthContext';
+import { url } from '../../config/url';
 
 function Allpost() {
     const [images, setImages] = useState([]);
@@ -20,7 +21,7 @@ function Allpost() {
     const getPost = async () => {
         try {
             setLoading(true)
-            const response = await axios.get('http://localhost:4000/get-all-post')
+            const response = await axios.get(url +'get-all-post')
             const SaveToimg = response.data.data.map(item => item.img);
             setImages(SaveToimg)
             setLoading(false)
@@ -30,7 +31,7 @@ function Allpost() {
         }
     }
     const handleClick = async (index)=>{
-        const response = await axios.get('http://localhost:4000/get-all-post')
+        const response = await axios.get(url +'get-all-post')
         setPostId(response.data.data[index]._id)
         history.push('/post/get-post')
     }
