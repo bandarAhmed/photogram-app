@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
-import { CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import './updatePost.css';
 
 function UpdatePost() {
   const [title, setTitle] = useState('');
   const [discraption, setDiscraption] = useState('');
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState('');
 
   const [loading, setLoading] = useState(false);
 
@@ -61,8 +61,20 @@ const git = sessionStorage.getItem('postId', postId)
           <div className='alll'>
             <div className='add-containerr'>
               <div className='form-containerr'>
+                <Button style={{position: 'absolute', right: '1%', top: '3%', fontSize: "40px"}} onClick={() => history.push("/timesheet")}
+                    ><i className="fa fa-arrow-circle-o-right"></i></Button>
                 <label>Add Image</label>
-                  <input className='imgFilee' onChange={handleFileChange} type='file' />
+                {images ?
+                    <img alt='Error' className='imgOfnewPost' src={URL.createObjectURL(images)} />
+                    :
+                    <>
+                    <label style={{fontSize: "50px"}} for="file-upload" class="custom-file-upload">
+                       +
+                  </label>
+                    <input id="file-upload"  onChange={handleFileChange} type='file'/>
+                    </>
+                  }
+                  
                 <label>Title</label>
                 <input value={title} onChange={(e) => setTitle(e.target.value)} className='text-inputt' type='text' />
                 <label>Dicraptions</label>

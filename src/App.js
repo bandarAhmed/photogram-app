@@ -25,6 +25,7 @@ function App() {
               <Redirect to='/login'/>
           </Route>
           <Route exact path='/post/get-post'>
+            <Headers/>
             <PostImg />
           </Route>
           <Route exact path='/register'>
@@ -35,6 +36,7 @@ function App() {
           }
           </Route>
           <Route exact path='/update/post'>
+           <Headers />
             <UpdatePost/>
           </Route>
           <Route exact path='/get-all-post'>

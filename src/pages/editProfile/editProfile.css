@@ -1,16 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+.background-color{
+    background: rgb(80,106,140);
+    background: radial-gradient(circle, rgba(80,106,140,1) 0%, rgba(0,0,0,1) 100%);
+    
+}
 .edit-profile{
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
+
 .form{
-    background: rgb(0, 0, 0);
-    height: 200px;
+    height: auto;
     width: 100%;
     text-align: center;
     gap: 10px;
     border-bottom: 1px solid white;
+    
 }  
 .edit-form{
     margin-top: 30px;
@@ -20,6 +26,7 @@
     align-items: center;
 }
 .sub-button{
+    margin-bottom: 5px;
     margin-top: 10px;
     border: none;
     width: 90px;
@@ -33,7 +40,8 @@
     border: none;
     outline: none;
     border-radius: 3px;
-    width: 150px;
+    width: 200px;
+    height: 20px;
 }
 .sub-button:hover{
     background: #ffffff77;
@@ -49,7 +57,6 @@
 
 /* this for all post css edit */
 .img-continner{
-    background: black;
     height: auto;
     min-height: 100vh;
 }
@@ -73,28 +80,20 @@
 }
 @media (min-width: 300px) and (max-width: 990px){
     .form{
-        height: 300px;
+        height: auto;
+        
     }  
     .edit-form{
-        margin-top: 60px;
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        align-items: center;
+        margin-top: 10px;
+        
     }
     .sub-button{
-        margin-top: 20px;
-        border: none;
-        width: 180px;
-        height: 25px;
-        background: #363636;
-        border-radius: 5px;
-        color: white;
-        font-family: 'Poor+Story';
+        margin-bottom: 10px;
 }
 .edit-img{
     width: 90px;
     height: 90px;
+    
 }
 .sub-button , input {
     border-radius: 3px;
@@ -105,14 +104,17 @@
     .img-form{
         grid-template-columns: repeat(1, auto);
         grid-template-rows: repeat(auto, auto); 
+        
     }
     .img-form img{
-        height: 700px;
-        width: 700px;
+        height: 600px;
+        width: 600px;
+        
     }
 }
 @media(min-width: 999px) and (max-width: 1150px){
     .img-form{
         grid-template-columns: repeat(2, auto);
+        
     }
 }

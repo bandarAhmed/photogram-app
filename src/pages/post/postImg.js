@@ -2,14 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './postImg.css'
 import { Button, CircularProgress } from '@mui/material';
@@ -25,6 +19,7 @@ function PostImg() {
     const [name, setName] = useState('');
     const [avatar, setAvatr] = useState([]);
     const [liked, setLike] = useState();
+    const [createAtt, setCreateAtt] = useState('');
     const [coutlikes, setLikeCount] = useState('');
     const [id, setId] = useState('');
     const [_id, set_Id] = useState('');
@@ -73,6 +68,7 @@ function PostImg() {
             setDiscraption(posts.data.data.discraption)
             setTitle(posts.data.data.title)
             setId(posts.data.data.author._id)
+            setCreateAtt(posts.data.data.createdAt.split('-')[0])
         } catch (e) {
 
         }
@@ -119,58 +115,45 @@ function PostImg() {
                 transform: "translate(-50%, -50%)",
                 zIndex: 2
             }} /> :
-            <>            
+            <>       
+            <div className='centerBack'>  
             <div className='background'>
-                <div className='nav-card'>
-                    <CardHeader
-                        avatar={
-                            <Avatar src={avatar}/>
-                        }
-                        title={name}
-                    />
-                    <Button style={{position: 'absolute', right: '0', top: '4%', fontSize: "40px"}} onClick={() => history.push("/timesheet")}
-                    ><i className="fa fa-arrow-circle-o-right"></i></Button>
+            <Button style={{position: 'absolute', right: '1%', top: '1.5%', fontSize: "20px"}} onClick={() => history.push("/timesheet")}>Posts<i className="fa fa-arrow-circle-o-right"></i></Button>
+                    <div className='name-img'>
+                    <img  src={avatar}/>
+                    <p style={{color: 'white'}}>{name}</p>
                 </div>
-                <Card sx={{ width: '100%', marginRight: "100px", marginLeft: "100px", marginTop: '72px', background: "black", color: 'white' }}>
-                    <CardMedia
-                        onDoubleClick={putLike}
-                        style={{ width: "100%", objectFit: 'cover' }}
-                        component="img"
-                        height="auto"
-                        image={images}
-                        alt="Error"
-                    />
-                    <CardActions>
+                <div className='posts'>
+                    <img onDoubleClick={putLike} src={images}/>
+                    <div className='like-edit'>
+                  <CardActions>
                         <IconButton onClick={putLike} aria-label="like">
                             {
                                 liked ? <FavoriteIcon style={{ color: 'red' }} />
-                                    : <FavoriteIcon  style={{ color: 'white' }} />
+                                : <FavoriteIcon  style={{ color: 'white' }} />
                             }
                             <p style={{ color: 'white', margin: '2px' }}>{coutlikes}</p>
+                            
                         </IconButton>
+                        <p style={{color: 'white', position: 'absolute', top: '55%'}}>{createAtt}</p>
                         {
-                        id === _id ? <Button onClick={() => history.push('/update/post')} variant="outlined" size="small" style={{ position: 'absolute', right: '120px' }}>
+                        id === _id ? <Button onClick={() => history.push('/update/post')} variant="outlined"  size="small" style={{ position: 'absolute', right: '10px', color: 'white', border: 'white solid ' }}>
                         Edit My Post</Button>
                         : ''
                     }
                     </CardActions>
                     {
-                        id === _id ? <DeleteIcon onClick={deletePost} fontSize="small" size="small" style={{ position: 'absolute', right: '120px', cursor: 'pointer' }} />
+                        id === _id ? <DeleteIcon onClick={deletePost} fontSize="small" size="small" style={{ position: 'absolute', right: '10px', cursor: 'pointer', color: 'white'}} />
                         : ''
                     }
-                    <CardContent>
-                        <Typography variant="h6" fontSize={'30px'} color="blcak">
-                            {title}
-                        </Typography>
-                    </CardContent>
-                    <CardContent style={{ whiteSpace: 'pre-line' }}>
-                        <Typography variant="body1" fontSize={'30px'}>
-                            {discraption}
-                        </Typography>
-                    </CardContent>
-                </Card>
-
+                    </div>
+                    <h2 style={{color: 'white'}}>{title}</h2>
+                    <h4 style={{color: 'white'}}>{discraption}</h4>
+                </div>
+                 
             </div>
+
+            </div>     
             </>
         }
         </>

@@ -127,6 +127,8 @@ function EditProfile() {
                                 <Button onClick={() => history.push('/login')}>موافق</Button>
                             </DialogActions>
                         </Dialog>
+                        <div className='background-color'>
+
                         <div className='edit-profile'>
                         <Button style={{position: 'absolute', right: '1%', top: '3%', fontSize: "40px"}} onClick={() => history.push("/timesheet")}
                     ><i className="fa fa-arrow-circle-o-right"></i></Button>
@@ -147,6 +149,7 @@ function EditProfile() {
                                     )).reverse()
                                 }
                             </div>
+                        </div>
                         </div>
                     </>
             }

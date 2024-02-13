@@ -78,7 +78,14 @@ function Register() {
             {avatar ?
                     <img alt='Error' style={{borderRadius: '50%', width: '80px',height: '80px'}} src={URL.createObjectURL(avatar)} />
                     :
-                    <input className='imgFile' onChange={handleFileChange} type='file' />
+                    <>
+                      ادخل صوره الملف الشخصي
+                      <label style={{fontSize: "50px"}} for="file-upload" class="custom-file-upload">
+                       +
+                      </label>
+                    <input id="file-upload"  onChange={handleFileChange} type='file'/>
+                    </>
+                 
             }
           <label htmlFor='name'>اسم المستخدم</label>
           <input  name='name' value={name} onChange={(e) => setName(e.target.value)} type='text' required/>
@@ -93,12 +100,12 @@ function Register() {
           <button type='sunmet' onClick={()=> onSubmet()}>انشاء الحساب</button>
           <br/>
           {
-            password !== seePassword ? <Alert style={{fontSize: '20px'}} className='alert' severity="error">كلمه المرور غير متطابقه</Alert> : ''
+            password !== seePassword ? <Alert style={{fontSize: '40px'}} className='alert' severity="error">كلمه المرور غير متطابقه</Alert> : ''
           }
           {
-            Status === 401 ? <Alert style={{fontSize: '20px', marginTop: '30px'}} className='alert' severity="error">الحساب مسجل اذهب الى لدي حساب بالفعل</Alert> 
+            Status === 401 ? <Alert style={{fontSize: '40px'}} severity="error">الحساب مسجل اذهب الى لدي حساب بالفعل</Alert> 
             : 
-            Status === 500 ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">املأ جميع الخانات</Alert> : ''
+            Status === 500 ? <Alert style={{fontSize: '40px'}}  severity="error">املأ جميع الخانات</Alert> : ''
           }
           <a href='/login'>لدي حساب بالفعل</a>
         </div>

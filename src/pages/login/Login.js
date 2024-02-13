@@ -62,8 +62,8 @@ function Login() {
                 <button onClick={() =>  onSubmet() }>تسجيل</button>
                 <a href='register'>انشاء حساب</a>
                 {
-                  status === 401 ?  <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">كلمه المرور او البريد غير صحيحه</Alert> 
-                  : status === 500 ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto'}} className='alert' severity="error">املأ جميع الخانات وتأكد من المعلومات</Alert> : ''
+                  status === 401 ?  <Alert style={{fontSize: '40px', Height: '60px'}} className='alert' severity="error">كلمه المرور او البريد غير صحيحه</Alert> 
+                  : status === 500 ? <Alert style={{fontSize: '40px', Height: '60px'}} className='alert' severity="error">املأ جميع الخانات وتأكد من المعلومات</Alert> : ''
                 }
               </div>
             </div>

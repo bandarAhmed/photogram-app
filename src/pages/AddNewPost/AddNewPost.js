@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './AddNewPost.css';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
@@ -64,14 +64,19 @@ function AddNewPost() {
                   {img ?
                     <img className='imgOfnewPost' alt='Error' src={URL.createObjectURL(img)} />
                     :
-                    <input required className='imgFile' onChange={handleFileChange} type='file' />
+                    <>
+                      <label style={{ fontSize: "50px" }} for="file-upload" class="custom-file-upload">
+                        +
+                      </label>
+                      <input id="file-upload" onChange={handleFileChange} type='file' />
+                    </>
                   }
                   <label>Title</label>
                   <input required value={title} onChange={(e) => setTitle(e.target.value)} className='text-input' type='text' />
                   <label>Dicraptions</label>
-                  <textarea required value={discraption} onChange={(e) => setDiscraption(e.target.value)} type='text' />
+                  <textarea required value={discraption} onChange={(e) => setDiscraption(e.target.value)} type='text' maxLength='1450' />
                   {
-                    status ? <Alert style={{fontSize: '20px', maxHeight: '50px', maxWidth: 'auto', marginBottom: "5px"}} className='alert' severity="error"> يحب اضافه جميع الحقول</Alert> : ''
+                    status ? <Alert style={{ fontSize: '20px', maxHeight: '50px', maxWidth: 'auto', marginBottom: "5px" }} className='alert' severity="error"> يحب اضافه جميع الحقول</Alert> : ''
                   }
                   <button className='post-button' onClick={onSubmit} type='submit'>نشر</button>
                 </div>
