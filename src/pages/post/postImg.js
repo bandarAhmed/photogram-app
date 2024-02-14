@@ -43,26 +43,25 @@ function PostImg() {
 
     const putLike = async () => {
         try {
-            await axios.post(`http://localhost:4000/post/${git}/like`, null, {
+            await axios.post(url + `post/${git}/like`, null, {
                 headers: {
                     Authorization: jwt
                 }
             }).then(res => res.data.message === 'LIke add it seeccesfuly' ? setLike(true) : setLike(false))
-
         } catch (e) {
             console.log(e)
         }
     }
 
     const coutlike = async () => {
-        const like = await axios.get(`http://localhost:4000/post/${git}/cointlike`)
+        const like = await axios.get(url + `post/${git}/cointlike`)
         setLikeCount(like.data.length)
     };
 
 
     const getData = async () => {
         try {
-            const posts = await axios.get(`http://localhost:4000/post/${git}/get-post`)
+            const posts = await axios.get(url + `post/${git}/get-post`)
             setName(posts.data.data.author.name)
             setImages(posts.data.data.img)
             setAvatr(posts.data.data.author.avatar)
