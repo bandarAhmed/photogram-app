@@ -20,12 +20,12 @@ function PostImg() {
     const [name, setName] = useState('');
     const [avatar, setAvatr] = useState([]);
     const [liked, setLike] = useState();
-    const [createAtt, setCreateAtt] = useState('');
+    const [createAtt, setCreateAtt] = useState([]);
     const [coutlikes, setLikeCount] = useState('');
     const [id, setId] = useState('');
     const [_id, set_Id] = useState('');
-    const [loading, setLoading] =useState(false);
-    
+    const [loading, setLoading] = useState(false);
+
     const { postId, jwt } = useContext(AuthContext);
     const history = useHistory()
 
@@ -35,7 +35,7 @@ function PostImg() {
         getId();
     }, [liked, coutlikes, id, _id]);
 
-    
+
     if (postId !== undefined) {
         localStorage.setItem('postId', postId);
     }
@@ -43,12 +43,12 @@ function PostImg() {
 
     const putLike = async () => {
         try {
-             await axios.post(`http://localhost:4000/post/${git}/like`, null, {
+            await axios.post(`http://localhost:4000/post/${git}/like`, null, {
                 headers: {
                     Authorization: jwt
                 }
-            }).then(res=> res.data.message === 'LIke add it seeccesfuly' ? setLike(true) : setLike(false))
-            
+            }).then(res => res.data.message === 'LIke add it seeccesfuly' ? setLike(true) : setLike(false))
+
         } catch (e) {
             console.log(e)
         }
@@ -69,31 +69,31 @@ function PostImg() {
             setDiscraption(posts.data.data.discraption)
             setTitle(posts.data.data.title)
             setId(posts.data.data.author._id)
-            setCreateAtt(posts.data.data.createdAt.split('-')[0])
+            setCreateAtt(posts.data.data.createdAt.replaceAll('-', ' ').substring(0, 9))
         } catch (e) {
 
         }
     }
 
-    const getId = async ()=> {
+    const getId = async () => {
         try {
-          
-            const user_d = await axios.get(url +`post/findId`, {
+
+            const user_d = await axios.get(url + `post/findId`, {
                 headers: {
                     Authorization: jwt
                 }
             })
             set_Id(user_d.data.author._id)
         } catch (e) {
-            
+
         }
     }
     const deletePost = async () => {
         try {
             setLoading(true)
-            if(id === _id){ 
-                await axios.delete(url +`post/${git}/delete`,{
-                    headers:{
+            if (id === _id) {
+                await axios.delete(url + `post/${git}/delete`, {
+                    headers: {
                         Authorization: jwt
                     }
                 })
@@ -107,56 +107,54 @@ function PostImg() {
 
     return (
         <>
-        {
-            loading ?  <CircularProgress size={70}
-            sx={{
-                position: "fixed",
-                left: "50%",
-                top: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 2
-            }} /> :
-            <>       
-            <div className='centerBack'>  
-            <div className='background'>
-                    <div className='name-img'>
-                    <img  src={avatar}/>
-                     <Button style={{position: 'absolute', right: '1%', top: '1.5%', fontSize: "20px"}} onClick={() => history.push("/timesheet")}>Posts<i className="fa fa-arrow-circle-o-right"></i></Button>
-                    <p style={{color: 'white'}}>{name}</p>
-                </div>
-                <div className='posts'>
-                    <img onDoubleClick={putLike} src={images}/>
-                    <div className='like-edit'>
-                  <CardActions>
-                        <IconButton onClick={putLike} aria-label="like">
-                            {
-                                liked ? <FavoriteIcon style={{ color: 'red' }} />
-                                : <FavoriteIcon  style={{ color: 'white' }} />
-                            }
-                            <p style={{ color: 'white', margin: '2px' }}>{coutlikes}</p>
-                            
-                        </IconButton>
-                        <p style={{color: 'white', position: 'absolute', top: '55%'}}>{createAtt}</p>
-                        {
-                        id === _id ? <Button onClick={() => history.push('/update/post')} variant="outlined"  size="small" style={{ position: 'absolute', right: '10px', color: 'white', border: 'white solid ' }}>
-                        Edit My Post</Button>
-                        : ''
-                    }
-                    </CardActions>
-                    {
-                        id === _id ? <DeleteIcon onClick={deletePost} fontSize="small" size="small" style={{ position: 'absolute', right: '10px', cursor: 'pointer', color: 'white'}} />
-                        : ''
-                    }
-                    </div>
-                    <h2 style={{color: 'white'}}>{title}</h2>
-                    <h4 style={{color: 'white'}}>{discraption}</h4>
-                </div>
-                 
-            </div>
+            {
+                loading ? <CircularProgress size={70}
+                    sx={{
+                        position: "fixed",
+                        left: "50%",
+                        top: "50%",
+                        transform: "translate(-50%, -50%)",
+                        zIndex: 2
+                    }} /> :
+                    <>
+                        <div className='centerBack'>
+                            <div className='background'>
+                                <div className='name-img'>
+                                    <img src={avatar} />
+                                    <Button style={{ position: 'absolute', right: '1%', top: '1.5%', fontSize: "20px" }} onClick={() => history.push("/timesheet")}>Posts<i className="fa fa-arrow-circle-o-right"></i></Button>
+                                    <p style={{ color: 'white' }}>{name}</p>
+                                </div>
+                                <div className='posts'>
+                                    <img onDoubleClick={() => putLike()} src={images} />
+                                    <div className='like-edit'>
+                                        <CardActions>
+                                            <IconButton onClick={() => putLike()} aria-label="like">
+                                                {
+                                                    liked ? <FavoriteIcon style={{ color: 'red' }} />
+                                                        : <FavoriteIcon style={{ color: 'white' }} />
+                                                }
+                                                <p style={{ color: 'white', margin: '2px'}}>{coutlikes}</p>
 
-            </div>     
-            </>
-        }
+                                            </IconButton>
+                                            <p style={{ color: 'white', position: 'absolute', top: '55%' }}>{createAtt}</p>
+                                            {
+                                                id === _id ? <Button  className='mobile-botten' onClick={() => history.push('/update/post')} variant="outlined" size="auto" style={{ position: 'absolute', right: '10px', color: 'white', border: 'white solid ', fontSize: 'auto' }}>
+                                                    Edit My Post</Button>
+                                                    : ''
+                                            }
+                                        </CardActions>
+                                        {
+                                            id === _id ? <DeleteIcon onClick={deletePost} fontSize="small" size="small" style={{ position: 'absolute', right: '10px', cursor: 'pointer', color: 'white' }} />
+                                                : ''
+                                        }
+                                    </div>
+                                    <h2 style={{ color: 'white' }}>{title}</h2>
+                                    <h4 style={{ color: 'white' }}>{discraption}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+            }
         </>
     )
 }

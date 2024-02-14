@@ -129,6 +129,7 @@ ul{
         border-top: white 1px solid;
         font-size: 30px;
         backdrop-filter: blur(50px);
+        
     }
     ul{
         position: absolute;
