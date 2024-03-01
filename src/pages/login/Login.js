@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './login.css'
 // import { LOGIN_URL } from '../../config/urls';
 import { Preferences } from '@capacitor/preferences';
@@ -12,6 +12,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState();
+  const [emailError, setEmailError] = useState();
+  const [passwordError, setPasswordError] = useState();
 
   const history = useHistory();
 
@@ -24,7 +26,7 @@ function Login() {
     
     try {
       setLoading(true)
-      await axios.post( url +'login', bassData).then(res => {
+      await axios.post( url + 'login', bassData).then(res => {
         Preferences.set({
           key: 'accessToken',
           value: res.data.accessToken
@@ -36,7 +38,25 @@ function Login() {
     } catch (e) {
       setLoading(false)
       setStatus(e.response.status)
-      console.log(e)
+    }
+    valdatie()
+    
+  };
+
+// هنا يتم التحقق من ما اذا كان البريد بريدا فعليا ام لا والتاكد من المدخلات انها ليست فارغه
+  const valdatie = ()=>{
+    if(email === ''){
+      setEmailError('يحب ادخال البريد')
+    }else if(email.includes('@') == false){
+      setEmailError('يجب ادخال بريد الكتروني حقيقي')
+    }
+    else {
+      setEmailError(" ")
+    }
+    if(password === ''){
+      setPasswordError('عليك ادخال كلمه المرور')
+    }else{
+      setPasswordError('')
     }
     
   }
@@ -54,20 +74,28 @@ function Login() {
           }} />
           :
           <>
+          <form>
             <div className='login-contianer'>
               <div className='inpus-continer'>
                 <label htmlFor='email'>البريد الكترني</label>
-                <input  name='email' value={email} type='text' onChange={(e) => setEmail(e.target.value)} required/>
+                <input  name='email' value={email} type='text' onChange={(e) => setEmail(e.target.value)} placeholder='ادخل البريد الاكتروني' required/>
+                <div style={{color: 'red'}}>{emailError}</div>
                 <label htmlFor='password'>كلمه المرور</label>
-                <input name='password' value={password} onChange={(e) => { setPassword(e.target.value) }} type='password' required/>
-                <button onClick={() =>  onSubmet() }>تسجيل</button>
-                <a href='register'>انشاء حساب</a>
+                <input name='password' value={password} onChange={(e) => { setPassword(e.target.value) }} type='password' placeholder='ادخل كلمه المرور' required/>
+                <div style={{color: 'red'}}>{passwordError}</div>
+                <button onClick={()=>  onSubmet()}>تسجيل</button>
                 {
-                  status === 401 ?  <Alert style={{fontSize: '40px', Height: '60px'}} className='alert' severity="error">كلمه المرور او البريد غير صحيحه</Alert> 
-                  : status === 500 ? <Alert style={{fontSize: '40px', Height: '60px'}} className='alert' severity="error">املأ جميع الخانات وتأكد من المعلومات</Alert> : ''
+                  status === 401 ? <Alert style={{fontSize: 'auto', Height: 'auto'}} className='alert' severity="error">كلمة المرور او البريد الاكتروني غير صحيح</Alert> :
+                  ''
                 }
+                {
+                   status == 500 ? <Alert style={{fontSize: 'auto', Height: 'auto'}} className='alert' severity="error">البريد الاكتروني غير موجود انقر على انشاء حساب جديد</Alert> :
+                   ''
+                }
+                <a href='register'>انشاء حساب</a>
               </div>
             </div>
+          </form>
           </>
       }
     </>

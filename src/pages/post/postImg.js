@@ -9,6 +9,7 @@ import './postImg.css'
 import { Button, CircularProgress } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { url } from '../../config/url';
+import avatar2 from '../../AvatarImage/avatar2.png'
 
 
 
@@ -119,7 +120,10 @@ function PostImg() {
                         <div className='centerBack'>
                             <div className='background'>
                                 <div className='name-img'>
-                                    <img src={avatar} />
+                                    {
+                                        avatar === null ? <img src={avatar2}/> : 
+                                        <img src={avatar} />
+                                    }
                                     <Button style={{ position: 'absolute', right: '1%', top: '1.5%', fontSize: "20px" }} onClick={() => history.push("/timesheet")}>Posts<i className="fa fa-arrow-circle-o-right"></i></Button>
                                     <p style={{ color: 'white' }}>{name}</p>
                                 </div>

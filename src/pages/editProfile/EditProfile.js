@@ -12,6 +12,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { CircularProgress } from '@mui/material';
 import { url } from '../../config/url';
+import avatar2 from '../../AvatarImage/avatar2.png'
 
 function EditProfile() {
 
@@ -35,12 +36,12 @@ function EditProfile() {
 
 
     const updatePro = async () => {
+        setDalog(true)
         const data = {
             name,
             password,
         }
         try {
-            setDalog(true)
             setLoading(true)
             await axios.put(url +'account/update', data, {
                 headers: {
@@ -50,7 +51,8 @@ function EditProfile() {
             Preferences.remove({
                 key: "accessToken"
             })
-            history.push('/get-all-post')
+            history.push('/login')
+            window.location.reload()
             setLoading(false)
         } catch (e) {
             setLoading(false)
@@ -134,7 +136,11 @@ function EditProfile() {
                         <Button style={{position: 'absolute', right: '1%', top: '3%', fontSize: "40px"}} onClick={() => history.push("/timesheet")}
                     ><i className="fa fa-arrow-circle-o-right"></i></Button>
                             <div className='form'>
-                                <img src={avatar} className='edit-img' alt='error' />
+                            {
+                                        avatar === null ? <img src={avatar2} className='edit-img' alt='error'/> : 
+                                      
+                                    <img src={avatar} className='edit-img' alt='error' />
+                            }
                                 <div className='edit-form'>
                                     <input placeholder={name} value={name} onChange={(e) => setName(e.target.value)} />
                                     <input placeholder='Edit Password (Required)' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />

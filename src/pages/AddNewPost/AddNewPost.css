@@ -23,11 +23,12 @@ background: radial-gradient(circle, rgba(80,106,140,1) 0%, rgba(0,0,0,1) 100%);
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.5);
-  height: 750px;
+  min-height: 750px;
+  height: auto;
   width: 400px;
   gap: 20px;
   border-radius: 30px;
-  
+  padding: 10px;
 }
 .text-input {
   width: 90%;
@@ -53,7 +54,7 @@ background: radial-gradient(circle, rgba(80,106,140,1) 0%, rgba(0,0,0,1) 100%);
   background: rgb(25, 25, 145);
   color: white;
   height: 30px;
-  font-size: 20px;
+  font-size: 15px;
   font-family: 'Changa';
 }
 .post-button:hover {

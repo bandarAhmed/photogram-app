@@ -14,6 +14,7 @@ body{
     height: auto;
 }
 .background{
+    overflow-x: hidden;
     display: grid;
     justify-content: center;
     align-items: center;
